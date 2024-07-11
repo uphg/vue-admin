@@ -25,7 +25,7 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       vueJsx(),
-      VueDevTools(),
+      // VueDevTools(),
       AutoImport({
         include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
         imports: [

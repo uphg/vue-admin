@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="default-layout" flex="~ col">
     <div
       :class="[
         'layout-container',
@@ -11,9 +11,9 @@
     >
       <Header />
       <Content />
-      <!-- <Footer/> -->
+      <Footer/>
+      <Sidebar />
     </div>
-    <Sidebar />
   </div>
 </template>
 

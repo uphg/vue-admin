@@ -1,15 +1,17 @@
 <template>
   <div :class="['sidebar', { 'sidebar--collapsed': sidebar.collapsed }]">
-    <n-switch v-model:value="sidebar.collapsed" />
-    <n-menu
-      :collapsed="sidebar.collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :options="menuOptions"
-      :render-label="renderMenuLabel"
-      :render-icon="renderMenuIcon"
-      :expand-icon="expandIcon"
-    />
+    <div class="h-[var(--navbar-height)]"></div>
+    <div>
+      <n-menu
+        :collapsed="sidebar.collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+        :render-label="renderMenuLabel"
+        :render-icon="renderMenuIcon"
+        :expand-icon="expandIcon"
+      />
+    </div>
   </div>
 </template>
 
@@ -96,6 +98,7 @@ function renderMenuLabel(option: MenuOption) {
   }
   return option.label as string
 }
+
 function renderMenuIcon(option: MenuOption) {
   // 渲染图标占位符以保持缩进
   if (option.key === 'sheep-man') return true
@@ -103,11 +106,10 @@ function renderMenuIcon(option: MenuOption) {
   if (option.key === 'food') return null
   return h(NIcon, null, { default: () => h(BookmarkOutline) })
 }
+
 function expandIcon() {
   return h(NIcon, null, { default: () => h(CaretDownOutline) })
 }
-
-// sidebar item hover：rgba(0, 0, 0, 0.04)
 </script>
 
 <style lang="scss" scoped>
@@ -115,10 +117,7 @@ function expandIcon() {
   transition: width 0.3s var(--n-bezier);
   border-inline-end: 1px solid var(--border-color);
   writing-mode: horizontal-tb;
-  width: var(--sidebar-width);
-  // inverted
-  // background-color: rgb(0, 20, 40);
-  @apply h-100vh box-border fixed top-0 left-0 bottom-0;
+  @apply h-100vh w-[var(--sidebar-width)] box-border fixed top-0 left-0 bottom-0;
   &--collapsed {
     width: var(--sidebar--collapsed-width);
   }
