@@ -56,7 +56,6 @@ export default defineConfig(({ command }) => {
         include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/]
       }),
       UnoCSS(),
-      // svgstore()
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
         svgoOptions: isBuild,
