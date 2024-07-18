@@ -10,9 +10,12 @@
 </template>
 
 <script setup lang="ts">
-// import { useCounterStore } from '@/stores/counter'
+import { getRouteData } from '~mock/getRouteData'
 
-// const counter = useCounterStore()
+const routeData = await getRouteData()
+
+console.log('routeData')
+console.log(routeData)
 </script>
 
 <style lang="scss" scoped>

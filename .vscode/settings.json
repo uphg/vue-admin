@@ -1,16 +1,17 @@
 {
   "typescript.tsdk": "./node_modules/typescript/lib",
   "npm.packageManager": "pnpm",
-
-
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "search.exclude": {
+    // default
     "**/node_modules": true,
+    "**/bower_components": true,
+
+    // customize
     "**/*.log": true,
     "**/*.log*": true,
-    "**/bower_components": true,
     "**/dist": true,
     "**/elehukouben": true,
     "**/.git": true,
@@ -39,24 +40,28 @@
 
   "scss.lint.unknownAtRules": "ignore",
   "files.exclude": {
+    // default
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+
+    // customize
     "**/.cache": true,
     "**/.editorconfig": true,
     "**/.eslintcache": true,
     "**/bower_components": true,
     "**/.idea": true,
     "**/tmp": true,
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
     "**/vite.config.*.timestamp-*": true
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/.vscode/**": true,
     "**/node_modules/**": true,
+  
+    "**/.vscode/**": true,
     "**/tmp/**": true,
     "**/bower_components/**": true,
     "**/dist/**": true,
