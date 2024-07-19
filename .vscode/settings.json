@@ -5,7 +5,7 @@
   // "eslint.experimental.useFlatConfig": true, //errors（aka eslint.config.js). Requires ESLint version >= 8.21 < 8.57.0）
   // Disable the default formatter
   "prettier.enable": false,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
