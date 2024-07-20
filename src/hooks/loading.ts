@@ -1,4 +1,9 @@
-export let $loading: { visible: boolean, message: string | null, open: (message?: string) => void, close: () => void } | null = null 
+export let $loading: {
+  visible: boolean
+  message: string | null
+  start: (message?: string) => void
+  stop: () => void
+} | null = null
 
 const defaultMessage = '加载中...'
 
@@ -6,19 +11,19 @@ export function useGlobalLoading() {
   $loading = $loading ?? reactive({
     visible: false,
     message: null as string | null,
-    open,
-    close
+    start,
+    stop,
   })
 
   return { $loading }
 }
 
-function open(message?: string) {
+function start(message?: string) {
   $loading!.message = message ?? defaultMessage
   $loading!.visible = true
 }
 
-function close() {
+function stop() {
   $loading!.message = null
   $loading!.visible = false
 }

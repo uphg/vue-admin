@@ -1,9 +1,7 @@
 <template>
   <n-spin :show="$loading.visible" class="root">
     <n-message-provider>
-      <Suspense>
-        <RouterView />
-      </Suspense>
+      <RouterView />
     </n-message-provider>
     <template v-if="$loading.message" #description>
       {{ $loading.message }}

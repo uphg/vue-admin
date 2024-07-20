@@ -1,5 +1,6 @@
-import { fileURLToPath, URL } from 'node:url'
+import { URL, fileURLToPath } from 'node:url'
 import path from 'node:path'
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -14,7 +15,7 @@ const naiveUIComponentNames = getNaiveUIComponentNames()
 
 function getNaiveUIComponentNames() {
   const exportKeys = Object.keys(NativeUI)
-  return exportKeys.filter((item) => /^N/.test(item))
+  return exportKeys.filter(item => item.startsWith('N'))
 }
 
 // https://vitejs.dev/config/
@@ -34,15 +35,15 @@ export default defineConfig(({ command }) => {
               'useDialog',
               'useMessage',
               'useNotification',
-              'useLoadingBar'
-            ])
-          }
+              'useLoadingBar',
+            ]),
+          },
         ],
         dts: 'src/auto-imports.d.ts',
         dirs: ['src/components', 'src/hooks', 'src/stores', 'src/shared'],
         eslintrc: {
-          enabled: true // <-- this
-        }
+          enabled: true, // <-- this
+        },
       }),
       Components({
         dts: 'src/components.d.ts',
@@ -51,21 +52,21 @@ export default defineConfig(({ command }) => {
         extensions: ['vue', 'tsx'],
         resolvers: [NaiveUiResolver()],
         // resolvable file suffixes
-        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/]
+        include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/],
       }),
       UnoCSS(),
       createSvgIconsPlugin({
         iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
         svgoOptions: isBuild,
         // default
-        symbolId: 'icon-[name]'
-      })
+        symbolId: 'icon-[name]',
+      }),
     ],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
         '~mock': fileURLToPath(new URL('./mock', import.meta.url)),
-      }
+      },
     },
     build: {
       rollupOptions: {
@@ -77,9 +78,9 @@ export default defineConfig(({ command }) => {
             if (id.includes('node_modules')) {
               return 'vendor'
             }
-          }
-        }
-      }
-    }
+          },
+        },
+      },
+    },
   }
 })

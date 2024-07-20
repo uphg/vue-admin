@@ -1,14 +1,11 @@
 import { defineStore } from 'pinia'
 
-export const useSidebarStore = defineStore('counter', () => {
+export const useSidebarStore = defineStore('sidebar', () => {
   const collapsed = ref(false)
-  function setCollapsed(value: boolean) {
-    collapsed.value = value
-  }
 
   function toggleCollapsed() {
     collapsed.value = !collapsed.value
   }
 
-  return { collapsed, setCollapsed, toggleCollapsed }
+  return { collapsed, toggleCollapsed }
 })

@@ -12,10 +12,12 @@
 <script setup lang="ts">
 import { getRouteData } from '~mock/getRouteData'
 
-const routeData = await getRouteData()
+onMounted(async () => {
+  const routeData = await getRouteData()
 
-console.log('routeData')
-console.log(routeData)
+  console.log('routeData')
+  console.log(routeData)
+})
 </script>
 
 <style lang="scss" scoped>

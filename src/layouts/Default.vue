@@ -1,17 +1,14 @@
 <template>
   <div class="default-layout" flex="~ col">
     <div
-      :class="[
-        'layout-container',
-        {
-          'has-sidebar': true,
-          'has-sidebar--collapsed': sidebar.collapsed
-        }
-      ]"
+      class="layout-container has-sidebar"
+      :class="{
+        'has-sidebar--collapsed': sidebar.collapsed,
+      }"
     >
       <Header />
       <Content />
-      <Footer/>
+      <Footer />
       <Sidebar />
     </div>
   </div>

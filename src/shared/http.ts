@@ -1,11 +1,14 @@
+import axios from 'axios'
+import type { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 import { $loading } from '@/hooks/loading'
 import type { JSONValue } from '@/types'
-import axios, { AxiosError, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
+
+export interface ResponseData<T = unknown> { code: number, data?: T, message?: string }
 
 export class HTTPClient {
   instance: AxiosInstance
@@ -15,7 +18,7 @@ export class HTTPClient {
   }
 
   get<R = unknown>(url: string, query?: Record<string, string>, config?: GetConfig) {
-    return this.instance.request<R>({ ...config, url: url, params: query, method: 'get' })
+    return this.instance.request<R>({ ...config, url, params: query, method: 'get' })
   }
 
   post<R = unknown>(url: string, data?: Record<string, JSONValue>, config?: PostConfig) {
@@ -27,7 +30,7 @@ export class HTTPClient {
   }
 
   delete<R = unknown>(url: string, query?: Record<string, string>, config?: DeleteConfig) {
-    return this.instance.request<R>({ ...config, url: url, params: query, method: 'delete' })
+    return this.instance.request<R>({ ...config, url, params: query, method: 'delete' })
   }
 }
 
@@ -39,7 +42,7 @@ http.instance.interceptors.request.use((config) => {
     config.headers!.Authorization = `Bearer ${jwt}`
   }
   if (config._autoLoading) {
-    $loading?.open('加载中...')
+    $loading?.start('加载中...')
   }
   return config
 })
@@ -47,20 +50,20 @@ http.instance.interceptors.request.use((config) => {
 http.instance.interceptors.response.use(
   (response) => {
     if (response.config._autoLoading === true) {
-      $loading?.close()
+      $loading?.stop()
     }
     return response
   },
   (error: AxiosError) => {
     console.log(1)
     if (error.response?.config._autoLoading === true) {
-      $loading?.close()
+      $loading?.stop()
     }
     throw error
-  }
+  },
 )
 
-http.instance.interceptors.response.use(response => {
+http.instance.interceptors.response.use((response) => {
   return response
 }, (error) => {
   if (error.response) {

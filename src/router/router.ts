@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/home/Home.vue'
+import { setupRouterGuard } from './guards'
 import LayoutDefault from '@/layouts/Default.vue'
 
 const router = createRouter({
@@ -15,17 +16,12 @@ const router = createRouter({
           component: Home,
           name: 'home',
           meta: {
-            title: '首页'
-          }
-        }
-      ]
+            title: '首页',
+          },
+        },
+      ],
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   component: () => import('../views/About.vue')
-    // }
-  ]
+  ],
 })
 
 export default router

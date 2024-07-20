@@ -5,7 +5,7 @@ export let $message: MessageApiInjection | null = null
 export function useGlobalMessage() {
   !$message && loadGlobalMessage()
   return { $message }
-} 
+}
 
 export function loadGlobalMessage() {
   onScopeDispose(() => {

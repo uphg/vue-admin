@@ -1,0 +1,1 @@
+export const APP_TOKEN_CACHE_KEY = 'APP_TOKEN_CACHE_KEY'
