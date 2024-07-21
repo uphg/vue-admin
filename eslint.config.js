@@ -10,6 +10,7 @@ export default antfu(
       'import/no-mutable-exports': 'off',
       'no-console': 'off',
       'no-restricted-syntax': 'off',
+      // 'nonblock-statement-body-position': 'error', // 关闭 if 语句结束后强制换行
       'ts/no-unused-expressions': ['error', { allowShortCircuit: true }],
       // vue 文件各模块顺序
       'vue/block-order': ['error', {

@@ -2,14 +2,15 @@ import { createRequest } from './create'
 
 /**
  * 获取用户信息
- * @returns
+ * @returns object
  */
 export function getUserInfo(token: string) {
+  console.log('getUserInfo')
   return createRequest(token
     ? {
         code: 200,
         data: {
-          userId: 1,
+          id: 1,
           name: 'Admin',
           rules: ['admin'],
           email: 'admin@example.com',

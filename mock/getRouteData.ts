@@ -5,9 +5,10 @@ import { createRequest } from './create'
  * @returns 见 https://doc.ruoyi.vip/ruoyi-vue/document/qdsc.html#路由配置
  */
 export function getRouteData() {
+  console.log('getRouteData')
   return createRequest({
     code: 200,
-    data: routeDate
+    data: routeDate,
   })
 }
 
@@ -23,7 +24,7 @@ const routeDate = [
       title: '系统管理',
       icon: 'system',
       noCache: false,
-      link: null
+      link: null,
     },
     children: [
       {
@@ -35,8 +36,8 @@ const routeDate = [
           title: '用户管理',
           icon: 'user',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Role',
@@ -47,8 +48,8 @@ const routeDate = [
           title: '角色管理',
           icon: 'peoples',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Menu',
@@ -59,8 +60,8 @@ const routeDate = [
           title: '菜单管理',
           icon: 'tree-table',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Dept',
@@ -71,8 +72,8 @@ const routeDate = [
           title: '部门管理',
           icon: 'tree',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Post',
@@ -83,8 +84,8 @@ const routeDate = [
           title: '岗位管理',
           icon: 'post',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Dict',
@@ -95,8 +96,8 @@ const routeDate = [
           title: '字典管理',
           icon: 'dict',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Config',
@@ -107,8 +108,8 @@ const routeDate = [
           title: '参数设置',
           icon: 'edit',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Notice',
@@ -119,8 +120,8 @@ const routeDate = [
           title: '通知公告',
           icon: 'message',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Log',
@@ -133,7 +134,7 @@ const routeDate = [
           title: '日志管理',
           icon: 'log',
           noCache: false,
-          link: null
+          link: null,
         },
         children: [
           {
@@ -145,8 +146,8 @@ const routeDate = [
               title: '操作日志',
               icon: 'form',
               noCache: false,
-              link: null
-            }
+              link: null,
+            },
           },
           {
             name: 'Logininfor',
@@ -157,12 +158,12 @@ const routeDate = [
               title: '登录日志',
               icon: 'logininfor',
               noCache: false,
-              link: null
-            }
-          }
-        ]
-      }
-    ]
+              link: null,
+            },
+          },
+        ],
+      },
+    ],
   },
   {
     name: 'Monitor',
@@ -175,7 +176,7 @@ const routeDate = [
       title: '系统监控',
       icon: 'monitor',
       noCache: false,
-      link: null
+      link: null,
     },
     children: [
       {
@@ -187,8 +188,8 @@ const routeDate = [
           title: '在线用户',
           icon: 'online',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Job',
@@ -199,8 +200,8 @@ const routeDate = [
           title: '定时任务',
           icon: 'job',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Druid',
@@ -211,8 +212,8 @@ const routeDate = [
           title: '数据监控',
           icon: 'druid',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Server',
@@ -223,8 +224,8 @@ const routeDate = [
           title: '服务监控',
           icon: 'server',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Cache',
@@ -235,8 +236,8 @@ const routeDate = [
           title: '缓存监控',
           icon: 'redis',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'CacheList',
@@ -247,10 +248,10 @@ const routeDate = [
           title: '缓存列表',
           icon: 'redis-list',
           noCache: false,
-          link: null
-        }
-      }
-    ]
+          link: null,
+        },
+      },
+    ],
   },
   {
     name: 'Tool',
@@ -263,7 +264,7 @@ const routeDate = [
       title: '系统工具',
       icon: 'tool',
       noCache: false,
-      link: null
+      link: null,
     },
     children: [
       {
@@ -275,8 +276,8 @@ const routeDate = [
           title: '表单构建',
           icon: 'build',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Gen',
@@ -287,8 +288,8 @@ const routeDate = [
           title: '代码生成',
           icon: 'code',
           noCache: false,
-          link: null
-        }
+          link: null,
+        },
       },
       {
         name: 'Swagger',
@@ -299,9 +300,9 @@ const routeDate = [
           title: '系统接口',
           icon: 'swagger',
           noCache: false,
-          link: null
-        }
-      }
-    ]
-  }
+          link: null,
+        },
+      },
+    ],
+  },
 ]

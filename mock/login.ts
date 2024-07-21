@@ -1,6 +1,7 @@
 import { createRequest } from './create'
 
 export function login(params: { username: string, password: string }) {
+  console.log('login')
   const { username, password } = params
   return createRequest(
     username === 'admin' && password === '123456'

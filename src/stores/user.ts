@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import type { ResponseData } from '@/shared/http'
 import { getRouteData } from '~mock/getRouteData'
 import { getUserInfo } from '~mock/getUserInfo'
+import { createAsyncRoutes } from '@/utils/async-route'
 
 interface MenuItem {
   title: string
@@ -30,16 +31,17 @@ export const useUserStore = defineStore('user', () => {
     setUser(newState: UserInfo) {
       merge(state, newState)
     },
-    getUserInfo() {
-      const token = localStorage.getItem(APP_TOKEN_CACHE_KEY)!
-      return getUserInfo(token).then((res: ResponseData) => {
-        if (res.code === 200) {
-          state.setUser(res.data as UserInfo)
-          return getRouteData()
-        } else {
-          retunr
-        }
-      }) as Promise<UserInfo>
+    async getUserInfo() {
+      const res = await getUserInfo() as ResponseData<UserInfo>
+      if (res.code === 200) {
+        state.setUser(res.data!)
+      }
+    },
+    async getAsyncRoutes() {
+      const res = await getRouteData()
+      if (res.code === 200) {
+        return createAsyncRoutes(res.data!)
+      }
     },
   })
   return state
