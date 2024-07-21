@@ -11,13 +11,13 @@ function setupPermission(router: Router) {
   router.beforeEach(async (to, from) => {
     const token = localStorage.getItem(APP_TOKEN_CACHE_KEY)! || 'admin-token'
     if (!token) {
-      return handleCommonRoute(to, from, next)
+      return handleCommonRoute(to, from)
     }
     await getPermissionPage()
     if (userStore.id) {
       return true
     }
-    return handleCommonRoute(to, from, next)
+    return handleCommonRoute(to, from)
   })
 
   async function getPermissionPage() {
