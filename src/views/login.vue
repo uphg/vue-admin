@@ -1,6 +1,6 @@
 <template>
-  <n-space vertical :size="12">
-    <n-card title="Admin Login">
+  <div class="h-screen flex items-center justify-center">
+    <n-card title="Login" class="w-96">
       <n-form ref="formRef" :model="loginForm" :rules="rules">
         <n-form-item path="username" label="Username">
           <n-input v-model:value="loginForm.username" placeholder="Enter your username" />
@@ -9,13 +9,13 @@
           <n-input v-model:value="loginForm.password" type="password" placeholder="Enter your password" />
         </n-form-item>
         <n-form-item>
-          <n-button type="primary" @click="handleLogin">
+          <n-button class="w-full" type="primary" size="large" :loading="loading"@click="handleLogin">
             登录
           </n-button>
         </n-form-item>
       </n-form>
     </n-card>
-  </n-space>
+  </div>
 </template>
 
 <script setup lang="ts">
