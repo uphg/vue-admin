@@ -18,6 +18,7 @@ coverage
 /cypress/screenshots/
 
 vite.config.ts.*
+vitest.config.ts.*
 
 /src/auto-imports.d.ts
 /src/components.d.ts
