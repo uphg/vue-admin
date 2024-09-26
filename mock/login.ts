@@ -1,6 +1,6 @@
 import { createRequest } from './create'
 
-export function login(params: { username: string, password: string }) {
+export function apiLoagin(params: { username: string, password: string }) {
   console.log('login')
   const { username, password } = params
   return createRequest(

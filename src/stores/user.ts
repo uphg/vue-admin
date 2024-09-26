@@ -18,8 +18,6 @@ interface UserInfo {
   token: string
 }
 
-const localStorage = window.localStorage
-
 export const useUserStore = defineStore('user', () => {
   const state = reactive({
     id: '',
@@ -32,7 +30,7 @@ export const useUserStore = defineStore('user', () => {
       merge(state, newState)
     },
     async getUserInfo() {
-      const res = await getUserInfo() as ResponseData<UserInfo>
+      const res = await getUserInfo('admin-token') as ResponseData<UserInfo>
       if (res.code === 200) {
         state.setUser(res.data!)
       }
@@ -46,3 +44,5 @@ export const useUserStore = defineStore('user', () => {
   })
   return state
 })
+
+export type UserStore = ReturnType<typeof useUserStore>

@@ -4,30 +4,28 @@ import LayoutInnerLink from '@/layouts/InnerLink.vue'
 
 const viewsModule = import.meta.glob('@/views/**/*.vue')
 
-const layoutsMap = {
+const layoutsMap: { [key: string]: any } = {
   Default: LayoutDefault,
   ParentView: LayoutParentView,
   InnerLink: LayoutInnerLink,
 }
 
 export function createAsyncRoutes(data: any[]) {
-  // import.meta.glob('@/views/**/*.vue')
   const routes: any[] = []
   for (const item of data) {
+    const component = getComponent(item.component)
     const route: any = {
       path: item.path,
       name: item.title,
       component: LayoutDefault,
       children: [
         {
-          path: '',
-          component: getComponent(item.component),
+          path: item.path,
+          component,
         },
       ],
     }
-
     routes.push(route)
-
     if (item.children) {
       route.children = createAsyncRoutes(item.children)
     }
@@ -36,9 +34,8 @@ export function createAsyncRoutes(data: any[]) {
 }
 
 function getComponent(componentPath: string) {
-  if (layoutsMap[componentPath])
-    return layoutsMap[componentPath]
-
+  const layout = layoutsMap?.[componentPath]
+  if (layout) return layout
   const path = componentPath.replace(/^views\/|\.vue$/g, '')
-  return viewsModule[`@/views/${componentPath}.vue`]
+  return viewsModule[`/src/views/${path}.vue`]
 }
