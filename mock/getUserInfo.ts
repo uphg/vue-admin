@@ -19,5 +19,5 @@ export function getUserInfo(token: string) {
     : {
         code: 401,
         message: '未登录',
-      })
+      }, 'success', { loading: true })
 }

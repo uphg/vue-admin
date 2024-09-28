@@ -10,8 +10,8 @@
       <div class="flex cursor-pointer" @click="sidebar.toggleCollapsed">
         <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
       </div>
-      <div>
-        <n-button type="primary" @click="logout">
+      <div class="ml-auto">
+        <n-button type="primary" size="small" @click="logout">
           退出
         </n-button>
       </div>

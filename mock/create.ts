@@ -1,13 +1,13 @@
 import { isFunction } from 'lodash-es'
 import { $loading } from '@/hooks/loading'
 
-export function createRequest(data: object | any[], status: 'success' | 'error' = 'success') {
+export function createRequest(data: object | any[], status: 'success' | 'error' = 'success', { loading = false } = {}) {
   console.log('createRequest', data, status)
   return new Promise((resolve, reject) => {
-    $loading?.start()
+    loading && $loading?.start()
     setTimeout(() => {
       const fn = status === 'success' ? resolve : reject
-      $loading?.stop()
+      loading && $loading?.stop()
       fn(isFunction(data) ? data() : data)
     }, 300)
   })
