@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { assign } from 'lodash-es'
+import type { RouteRecordRaw } from 'vue-router'
 import type { ResponseData } from '@/shared/http'
 import { getRouteData } from '~mock/getRouteData'
 import { getUserInfo } from '~mock/getUserInfo'
@@ -26,23 +28,19 @@ export const useUserStore = defineStore('user', () => {
     email: '',
     token: '',
     menus: [],
-    setUser(newState: UserInfo) {
-      merge(state, newState)
-    },
-    async getUserInfo() {
-      const res = await getUserInfo('admin-token') as ResponseData<UserInfo>
-      if (res.code === 200) {
-        state.setUser(res.data!)
-      }
-    },
-    async getAsyncRoutes() {
-      const res = await getRouteData()
-      if (res.code === 200) {
-        return createAsyncRoutes(res.data!)
-      }
-    },
   })
-  return state
+
+  async function setUserInfo() {
+    const res = await getUserInfo('admin-token') as ResponseData<UserInfo>
+    assign(state, res.data!)
+  }
+
+  async function buildDynamicRoutes() {
+    const res = await getRouteData() as ResponseData<RouteRecordRaw[]>
+    return createAsyncRoutes(res.data!)
+  }
+
+  return { ...toRefs(state), setUserInfo, buildDynamicRoutes }
 })
 
 export type UserStore = ReturnType<typeof useUserStore>

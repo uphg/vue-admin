@@ -1,8 +1,7 @@
 <template>
   <header
-    :class="[
-      'header position-fixed top-0 left-[var(--sidebar-width)] right-0 px-6 box-border',
-      { 'sidebar--collapsed': sidebar.collapsed }
+    class="header position-fixed left-[var(--sidebar-width)] right-0 top-0 box-border px-6" :class="[
+      { 'sidebar--collapsed': sidebar.collapsed },
     ]"
     flex="~ col justify-center"
   >
@@ -10,6 +9,11 @@
     <div class="h-14" flex="~ items-center">
       <div class="flex cursor-pointer" @click="sidebar.toggleCollapsed">
         <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
+      </div>
+      <div>
+        <n-button type="primary" @click="logout">
+          退出
+        </n-button>
       </div>
     </div>
 
@@ -24,8 +28,16 @@
 
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
+import { removeToken } from '@/utils/token'
 
 const sidebar = useSidebarStore()
+const router = useRouter()
+
+function logout() {
+  console.log('logout')
+  removeToken()
+  router.push('/login')
+}
 </script>
 
 <style lang="scss" scoped>

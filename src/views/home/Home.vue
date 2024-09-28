@@ -1,10 +1,18 @@
 <template>
-  <main class="home flex gap-6 flex-col">
-    <div class="flex gap-6" v-for="item in 20" :key="item">
-      <div class="w-60 h-45 px-4 py-3 border-rd-2 shadow-base bg-white">总销售额</div>
-      <div class="w-60 h-45 px-4 py-3 border-rd-2 shadow-base bg-white">访问量</div>
-      <div class="w-60 h-45 px-4 py-3 border-rd-2 shadow-base bg-white">支付笔数</div>
-      <div class="w-60 h-45 px-4 py-3 border-rd-2 shadow-base bg-white">运营活动效果</div>
+  <main class="home flex flex-col gap-6">
+    <div v-for="item in 20" :key="item" class="flex gap-6">
+      <div class="h-45 w-60 border-rd-2 bg-white px-4 py-3 shadow-base">
+        总销售额
+      </div>
+      <div class="h-45 w-60 border-rd-2 bg-white px-4 py-3 shadow-base">
+        访问量
+      </div>
+      <div class="h-45 w-60 border-rd-2 bg-white px-4 py-3 shadow-base">
+        支付笔数
+      </div>
+      <div class="h-45 w-60 border-rd-2 bg-white px-4 py-3 shadow-base">
+        运营活动效果
+      </div>
     </div>
   </main>
 </template>

@@ -27,25 +27,14 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '/:pathMatch(.*)*',
-    component: () => import('@/views/error/404.vue'),
-    hidden: true,
-  },
-  {
-    path: '/401',
-    name: '401',
-    component: () => import('@/views/error/401.vue'),
-    hidden: true,
-  },
-  {
     path: '',
     component: LayoutDefault,
-    redirect: '/index',
+    redirect: '/home',
     children: [
       {
-        path: '/index',
-        component: () => import('@/views/index.vue'),
-        name: 'Index',
+        path: 'home',
+        component: () => import('@/views/home/Home.vue'),
+        name: 'Home',
         meta: { title: '首页', icon: 'dashboard', affix: true },
       },
     ],
@@ -63,6 +52,17 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' },
       },
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('@/views/error/404.vue'),
+    hidden: true,
+  },
+  {
+    path: '/401',
+    name: '401',
+    component: () => import('@/views/error/401.vue'),
+    hidden: true,
   },
 ]
 
