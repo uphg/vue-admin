@@ -4,7 +4,7 @@ import { createRequest } from './create'
  * 获取用户信息
  * @returns object
  */
-export function getUserInfo(token: string) {
+export function apiGetUserInfo(token: string) {
   console.log('getUserInfo')
   return createRequest(token
     ? {

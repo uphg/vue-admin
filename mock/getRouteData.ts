@@ -4,7 +4,7 @@ import { createRequest } from './create'
  * 获取后台路由数据
  * @returns 见 https://doc.ruoyi.vip/ruoyi-vue/document/qdsc.html#路由配置
  */
-export function getRouteData() {
+export function apiGetRouteData() {
   console.log('getRouteData')
   return createRequest({
     code: 200,

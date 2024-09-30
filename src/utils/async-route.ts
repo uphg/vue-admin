@@ -33,6 +33,22 @@ export function createAsyncRoutes(data: any[]) {
   return routes
 }
 
+export function createSidebarMenus(data: any[]) {
+  const routes: any[] = []
+  for (const item of data) {
+    const route: any = {
+      path: item.path,
+      name: item.title,
+      icon: item.icon,
+    }
+    routes.push(route)
+    if (item.children) {
+      route.children = createSidebarMenus(item.children)
+    }
+  }
+  return routes
+}
+
 function getComponent(componentPath: string) {
   const layout = layoutsMap?.[componentPath]
   if (layout) return layout

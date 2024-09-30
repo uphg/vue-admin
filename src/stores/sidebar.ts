@@ -1,11 +1,33 @@
+import { assign } from 'lodash-es'
 import { defineStore } from 'pinia'
 
-export const useSidebarStore = defineStore('sidebar', () => {
-  const collapsed = ref(false)
+export type SidebarState = Partial<{
+  collapsed: boolean
+  menus: MenuItem[]
+}>
 
-  function toggleCollapsed() {
-    collapsed.value = !collapsed.value
+export interface MenuItem {
+  title: string
+  path: string
+  icon: string
+  children?: MenuItem[]
+}
+
+export const useSidebarStore = defineStore('sidebar', () => {
+  const state = reactive<SidebarState>({
+    collapsed: false,
+    menus: [],
+  })
+
+  function set(state: SidebarState) {
+    assign(state, state)
   }
 
-  return { collapsed, toggleCollapsed }
+  function toggleCollapsed() {
+    state.collapsed = !state.collapsed
+  }
+
+  return { ...toRefs(state), toggleCollapsed, set }
 })
+
+export type SidebarStore = ReturnType<typeof useSidebarStore>

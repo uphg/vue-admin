@@ -18,13 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { getRouteData } from '~mock/getRouteData'
-
 onMounted(async () => {
-  const routeData = await getRouteData()
-
-  console.log('routeData')
-  console.log(routeData)
 })
 </script>
 
