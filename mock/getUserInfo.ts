@@ -5,7 +5,6 @@ import { createRequest } from './create'
  * @returns object
  */
 export function apiGetUserInfo(token: string) {
-  console.log('getUserInfo')
   return createRequest(token
     ? {
         code: 200,

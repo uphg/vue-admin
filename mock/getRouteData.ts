@@ -1,16 +1,54 @@
+import { isNil, omit } from 'lodash-es'
 import { createRequest } from './create'
+import { treeMap } from '@/utils/treeMap'
+import { capitalize } from '@/utils/capitalize'
+
+interface RouteItem {
+  name: string
+  path: string
+  redirect: string
+  component: string
+  visible: boolean
+  onlyChild: boolean
+  meta: {
+    cached: boolean
+    title: string
+    icon: string
+    link: string | null
+  }
+  children?: RouteItem[]
+}
 
 /**
  * 获取后台路由数据
  * @returns 见 https://doc.ruoyi.vip/ruoyi-vue/document/qdsc.html#路由配置
  */
 export function apiGetRouteData() {
-  console.log('getRouteData')
-  return createRequest({
-    code: 200,
-    data: routeDate,
-  })
+  const data = handleRouteData(routeDate)
+  return createRequest({ code: 200, data })
 }
+
+// const routeItem = {
+//   name: 'System',
+//   path: '/system',
+//   redirect: 'noRedirect',
+//   component: 'Layout',
+//   visible: true,
+//   onlyChild: true,
+//   meta: {
+//     title: '系统管理',
+//     icon: 'system',
+//     cached: true,
+//     link: null,
+//   },
+//   children: [
+//     {
+//       name: 'User',
+//       path: 'user',
+//       component: 'system/user/index',
+//     },
+//   ],
+// }
 
 const routeDate = [
   {
@@ -306,3 +344,32 @@ const routeDate = [
     ],
   },
 ]
+
+function handleRouteData(routeData: any, namespace: string[] = []): RouteItem[] {
+  const result: RouteItem[] = []
+  for (const route of routeData) {
+    const { name, hidden, alwaysShow, meta, children, redirect, ...rest } = route ?? {}
+    const nameArr = [...namespace, name]
+    const newName = createName(nameArr)
+    const item = {
+      ...rest,
+      name: newName,
+      visible: !(hidden ?? false),
+      onlyChild: !(alwaysShow ?? false),
+      redirect: redirect === 'noRedirect' ? void 0 : redirect,
+      meta: {
+        ...(meta ? omit(meta, ['noCache']) : {}),
+        cached: !(meta?.noCache ?? false),
+      },
+    }
+    if (route.children) {
+      item.children = handleRouteData(route.children, nameArr)
+    }
+    result.push(item)
+  }
+  return result
+}
+
+function createName(namespace: string[]): string {
+  return namespace.reduce((acc, cur) => `${acc}${capitalize(cur)}`, '')
+}

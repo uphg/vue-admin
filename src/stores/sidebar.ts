@@ -1,17 +1,11 @@
 import { assign } from 'lodash-es'
 import { defineStore } from 'pinia'
+import type { MenuOption } from 'naive-ui'
 
 export type SidebarState = Partial<{
   collapsed: boolean
-  menus: MenuItem[]
+  menus: any[]
 }>
-
-export interface MenuItem {
-  title: string
-  path: string
-  icon: string
-  children?: MenuItem[]
-}
 
 export const useSidebarStore = defineStore('sidebar', () => {
   const state = reactive<SidebarState>({
@@ -19,8 +13,8 @@ export const useSidebarStore = defineStore('sidebar', () => {
     menus: [],
   })
 
-  function set(state: SidebarState) {
-    assign(state, state)
+  function set(value: SidebarState) {
+    assign(state, value)
   }
 
   function toggleCollapsed() {

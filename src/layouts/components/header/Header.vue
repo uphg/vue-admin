@@ -34,7 +34,6 @@ const sidebar = useSidebarStore()
 const router = useRouter()
 
 function logout() {
-  console.log('logout')
   removeToken()
   router.push('/login')
 }

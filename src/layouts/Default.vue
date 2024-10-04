@@ -1,5 +1,5 @@
 <template>
-  <div class="default-layout" flex="~ col">
+  <div flex="~ col">
     <div
       class="layout-container has-sidebar"
       :class="{

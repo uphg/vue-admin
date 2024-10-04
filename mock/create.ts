@@ -2,7 +2,6 @@ import { isFunction } from 'lodash-es'
 import { $loading } from '@/hooks/loading'
 
 export function createRequest(data: object | any[], status: 'success' | 'error' = 'success', { loading = false } = {}) {
-  console.log('createRequest', data, status)
   return new Promise((resolve, reject) => {
     loading && $loading?.start()
     setTimeout(() => {

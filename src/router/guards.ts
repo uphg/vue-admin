@@ -13,15 +13,15 @@ export function setupRouterGuard(router: Router) {
   const userStore = useUserStore()
   const sidebarStore = useSidebarStore()
   router.beforeEach(async (to, from) => {
+    if (userStore.id) {
+      return toPermissionRoute(to, from)
+    }
     const token = getToken()
     if (!token) {
       return toCommonRoute(to, from)
     }
     await loadPermissionInfo(router, { userStore, sidebarStore })
-    if (userStore.id) {
-      return true
-    }
-    return toCommonRoute(to, from)
+    return { ...to, replace: true }
   })
 }
 
@@ -33,7 +33,10 @@ async function loadPermissionInfo(router: Router, { userStore, sidebarStore }: {
 
   sidebarStore.set({ menus })
   userStore.set(userInfo)
-  routes.forEach(route => router.addRoute(route))
+  routes.forEach(route => {
+    console.log('route', route)
+    router.addRoute(route)
+  })
 }
 
 function toCommonRoute(to: RouteLocationNormalizedLoaded, _from: RouteLocationNormalized) {
@@ -41,6 +44,14 @@ function toCommonRoute(to: RouteLocationNormalizedLoaded, _from: RouteLocationNo
     return true
   } else {
     return '/login'
+  }
+}
+
+function toPermissionRoute(to: RouteLocationNormalizedLoaded, _from: RouteLocationNormalized) {
+  if (to?.name && commonRoutes.includes(to.name)) {
+    return '/home'
+  } else {
+    return true
   }
 }
 

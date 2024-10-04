@@ -55,7 +55,6 @@ http.instance.interceptors.response.use(
     return response
   },
   (error: AxiosError) => {
-    console.log(1)
     if (error.response?.config._autoLoading === true) {
       $loading?.stop()
     }
