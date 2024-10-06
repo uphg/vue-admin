@@ -1,109 +1,70 @@
 <template>
   <div class="sidebar" :class="[{ 'sidebar--collapsed': sidebar.collapsed }]">
     <div class="h-[var(--navbar-height)]" />
-    <div>
-      <n-menu
-        :collapsed="sidebar.collapsed"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="sidebar.menus"
-        :render-label="renderMenuLabel"
-        :render-icon="renderMenuIcon"
-        :expand-icon="expandIcon"
-      />
+    <div class="h-[calc(100vh-var(--navbar-height))] flex flex-col">
+      <n-scrollbar class="h-full">
+        <n-menu
+          ref="menuRef"
+          :key="menuKey"
+          v-model:value="selectedKey"
+          v-model:expanded-keys="expandedKeys"
+          :collapsed="sidebar.collapsed"
+          :collapsed-width="64"
+          :collapsed-icon-size="22"
+          :options="sidebar.menus"
+          :render-label="renderMenuLabel"
+          :render-icon="renderMenuIcon"
+          :expand-icon="expandIcon"
+        />
+      </n-scrollbar>
     </div>
   </div>
 </template>
 
 <script setup lang="tsx">
-import type { MenuOption } from 'naive-ui'
+import type { MenuInst, MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
+import { type RouteLocationNormalized, type RouteLocationRaw, type RouteRecordRaw, RouterLink } from 'vue-router'
+import { isNil } from 'lodash'
 import { useSidebarStore } from '@/stores/sidebar'
-import { RouterLink, type RouteLocationRaw } from 'vue-router';
 
+const route = useRoute()
 const sidebar = useSidebarStore()
+const expandedKeys = ref<string[]>([])
+const selectedKey = ref<string | undefined>()
+const menuRef = ref<MenuInst>()
+const menuKey = ref<number>(0)
+watch(route, handleMenuExpand)
 
-const menuOptions: MenuOption[] = [
-  {
-    label: '且听风吟',
-    key: 'hear-the-wind-sing',
-    href: 'https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F/3199',
-  },
-  // {
-  //   label: '1973年的弹珠玩具',
-  //   key: 'pinball-1973',
-  //   disabled: true,
-  //   children: [
-  //     {
-  //       label: '鼠',
-  //       key: 'rat',
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: '寻羊冒险记',
-  //   key: 'a-wild-sheep-chase',
-  //   disabled: true,
-  // },
-  // {
-  //   label: '舞，舞，舞',
-  //   key: 'dance-dance-dance',
-  //   children: [
-  //     {
-  //       type: 'group',
-  //       label: '人物',
-  //       key: 'people',
-  //       children: [
-  //         {
-  //           label: '叙事者',
-  //           key: 'narrator',
-  //         },
-  //         {
-  //           label: '羊男',
-  //           key: 'sheep-man',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: '饮品',
-  //       key: 'beverage',
-  //       children: [
-  //         {
-  //           label: '威士忌',
-  //           key: 'whisky',
-  //           href: 'https://baike.baidu.com/item/%E5%A8%81%E5%A3%AB%E5%BF%8C%E9%85%92/2959816?fromtitle=%E5%A8%81%E5%A3%AB%E5%BF%8C&fromid=573&fr=aladdin',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: '食物',
-  //       key: 'food',
-  //       children: [
-  //         {
-  //           label: '三明治',
-  //           key: 'sandwich',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       label: '过去增多，未来减少',
-  //       key: 'the-past-increases-the-future-recedes',
-  //     },
-  //   ],
-  // },
-]
+onMounted(() => {
+  menuKey.value = 1
+  handleMenuExpand(route)
+})
+
+function handleMenuExpand(route: RouteLocationNormalized) {
+  const { matched, name } = route ?? {}
+  expandedKeys.value = getExpandedKeys(matched)
+  if (isNil(name)) return
+  selectedKey.value = name as string
+}
+
+function getExpandedKeys(matched: RouteRecordRaw[]) {
+  return matched.map(item => item.name as string)
+}
 
 function renderMenuLabel(option: MenuOption) {
   if ('href' in option) {
     return h('a', { href: option.href, target: '_blank' }, option.label as string)
   }
-  return option.type === 'item' ? (
-    <RouterLink to={option.path as RouteLocationRaw}>
-      {option.label}
-    </RouterLink>
-  ) : (
-    <div>{option.label}</div>
-  )
+  return option.type === 'item'
+    ? (
+        <RouterLink to={option.path as RouteLocationRaw}>
+          {option.label}
+        </RouterLink>
+      )
+    : (
+        <div>{option.label}</div>
+      )
 }
 
 function renderMenuIcon(option: MenuOption) {

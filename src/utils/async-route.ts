@@ -1,7 +1,7 @@
+import { cloneJSON } from './cloneJSON'
 import LayoutDefault from '@/layouts/Default.vue'
 import LayoutParentView from '@/layouts/ParentView.vue'
 import LayoutInnerLink from '@/layouts/InnerLink.vue'
-import { cloneJSON } from './cloneJSON'
 
 const viewsModule = import.meta.glob('@/views/**/*.vue')
 
@@ -54,7 +54,7 @@ function createMenus(routes: any[], parentPaths: string[] = []) {
   for (const route of routes) {
     const { path, name, meta, children, ...rest } = route
     const pathList = [...parentPaths, path]
-    const newPath = slicePath(pathList)
+    const newPath = pathJoin(pathList)
     const item: any = {
       label: meta.title,
       key: name,
@@ -78,6 +78,6 @@ function getComponent(componentPath: string) {
   return viewsModule[`/src/views/${path}.vue`]
 }
 
-function slicePath(paths: string[]) {
+function pathJoin(paths: string[]) {
   return paths.filter(Boolean).join('/')
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-[var(--navbar-height)] min-h-125 p-8">
+  <div class="mt-[var(--navbar-height)] min-h-50vh p-8">
     <router-view />
   </div>
 </template>
