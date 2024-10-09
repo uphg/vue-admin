@@ -4,13 +4,16 @@ import LayoutDefault from '@/layouts/Default.vue'
 
 export const constantRoutes = [
   {
-    path: '/redirect',
+    path: '',
     component: LayoutDefault,
-    hidden: true,
+    redirect: '/home',
+    onlyChild: true,
     children: [
       {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index.vue'),
+        path: 'home',
+        component: () => import('@/views/home/Home.vue'),
+        name: 'Home',
+        meta: { title: '首页', icon: 'dashboard', affix: true },
       },
     ],
   },
@@ -27,23 +30,10 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: '',
-    component: LayoutDefault,
-    redirect: '/home',
-    children: [
-      {
-        path: 'home',
-        component: () => import('@/views/home/Home.vue'),
-        name: 'Home',
-        meta: { title: '首页', icon: 'dashboard', affix: true },
-      },
-    ],
-  },
-  {
     path: '/user',
     component: LayoutDefault,
-    hidden: true,
     redirect: 'noredirect',
+    hidden: true,
     children: [
       {
         path: 'profile',

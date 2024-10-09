@@ -354,7 +354,6 @@ function handleRouteData(routeData: any, namespace: string[] = []): RouteItem[] 
     const item = {
       ...rest,
       name: newName,
-      visible: !(hidden ?? false),
       onlyChild: !(alwaysShow ?? false),
       redirect: redirect === 'noRedirect' ? void 0 : redirect,
       meta: {

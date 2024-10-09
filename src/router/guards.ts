@@ -1,4 +1,5 @@
 import type { RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw, Router } from 'vue-router'
+import { constantRoutes } from './router'
 import type { UserState, UserStore } from '@/stores/user'
 import { getToken } from '@/utils/token'
 import { apiGetUserInfo } from '~mock/getUserInfo'
@@ -29,11 +30,15 @@ async function loadPermissionInfo(router: Router, { userStore, sidebarStore }: {
   const rawRoutes = await getRouteData()
   const userInfo = await getUserInfo()
   const routes = createAsyncRoutes(rawRoutes)
-  const menus = createSidebarMenus(rawRoutes)
+  const menuData = (constantRoutes as any[]).concat(rawRoutes)
+  console.log('menuData')
+  console.log(menuData)
+  const menus = createSidebarMenus(menuData)
+  console.log('menus', menus)
 
   sidebarStore.set({ menus })
   userStore.set(userInfo)
-  routes.forEach(route => {
+  routes.forEach((route) => {
     console.log('route', route)
     router.addRoute(route)
   })

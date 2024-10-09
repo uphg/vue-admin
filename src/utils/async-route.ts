@@ -1,3 +1,4 @@
+import { isNil } from 'lodash-es'
 import { cloneJSON } from './cloneJSON'
 import LayoutDefault from '@/layouts/Default.vue'
 import LayoutParentView from '@/layouts/ParentView.vue'
@@ -21,16 +22,6 @@ export function createAsyncRoutes(data: any[]) {
   return createRoutes(routes)
 }
 
-/**
- * 创建侧边栏菜单
- * @param _routes 路由数据
- * @returns 侧边栏菜单数据
- */
-export function createSidebarMenus(data: any[]) {
-  const routes = cloneJSON(data)
-  return createMenus(routes)
-}
-
 function createRoutes(routes: any[]) {
   const result: any[] = []
   for (const route of routes) {
@@ -49,14 +40,27 @@ function createRoutes(routes: any[]) {
   return result
 }
 
+/**
+ * 创建侧边栏菜单
+ * @param data 路由数据
+ * @returns 侧边栏菜单数据
+ */
+export function createSidebarMenus(data: any[]) {
+  const routes = cloneJSON(data)
+  return createMenus(routes)
+}
+
 function createMenus(routes: any[], parentPaths: string[] = []) {
   const menus: any[] = []
   for (const route of routes) {
-    const { path, name, meta, children, ...rest } = route
+    const { path, name, meta, onlyChild, children, hidden, ...rest } = (route?.onlyChild ? getOnlyChildMenu(route) : route) ?? {}
+    if (hidden === true) continue
     const pathList = [...parentPaths, path]
+    console.log('pathList')
+    console.log(pathList)
     const newPath = pathJoin(pathList)
     const item: any = {
-      label: meta.title,
+      label: meta?.title,
       key: name,
       path: newPath,
       type: 'item',
@@ -78,6 +82,21 @@ function getComponent(componentPath: string) {
   return viewsModule[`/src/views/${path}.vue`]
 }
 
+function getOnlyChildMenu(route: any) {
+  if (!route.children?.length) return route
+  let child = route
+  while (child?.children?.length) {
+    const visibleChildren = child.children.filter((item: any) => item.hidden !== true)
+    if (visibleChildren.length === 0) break
+    child = visibleChildren[0]
+  }
+  return child
+}
+
 function pathJoin(paths: string[]) {
-  return paths.filter(Boolean).join('/')
+  return `/${paths.filter(isUnnil).join('/').replace(/^\//, '')}`
+}
+
+function isUnnil(value: any) {
+  return value !== undefined && value !== null
 }
