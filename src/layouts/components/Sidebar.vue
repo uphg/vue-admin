@@ -25,7 +25,7 @@
 import type { MenuInst, MenuOption } from 'naive-ui'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
 import { type RouteLocationNormalized, type RouteLocationRaw, type RouteRecordRaw, RouterLink } from 'vue-router'
-import { isNil } from 'lodash'
+import { isNil } from 'lodash-es'
 import { useSidebarStore } from '@/stores/sidebar'
 
 const route = useRoute()
@@ -72,11 +72,19 @@ function renderMenuIcon(option: MenuOption) {
   if (option.key === 'sheep-man') return true
   // 返回 falsy 值，不再渲染图标及占位符
   if (option.key === 'food') return null
-  return h(NIcon, null, { default: () => h(BookmarkOutline) })
+  return (
+    <NIcon>
+      <BookmarkOutline />
+    </NIcon>
+  )
 }
 
 function expandIcon() {
-  return h(NIcon, null, { default: () => h(CaretDownOutline) })
+  return (
+    <NIcon>
+      <CaretDownOutline />
+    </NIcon>
+  )
 }
 </script>
 
