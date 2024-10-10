@@ -1,13 +1,16 @@
 <template>
   <n-breadcrumb>
-    <n-breadcrumb-item>
-      北京总行
-    </n-breadcrumb-item>
-    <n-breadcrumb-item>
-      天津分行
-    </n-breadcrumb-item>
-    <n-breadcrumb-item>
-      平山道支行
+    <n-breadcrumb-item v-for="item in breadItems" :key="item.key">
+      {{ item.label }}
     </n-breadcrumb-item>
   </n-breadcrumb>
 </template>
+
+<script setup lang="ts">
+const route = useRoute()
+const breadItems = computed(
+  () => route.matched
+    .filter((item) => Boolean(item.path))
+    .map((item) => ({ label: item.meta.title, key: item.path }))
+)
+</script>

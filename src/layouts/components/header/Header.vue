@@ -6,10 +6,11 @@
     flex="~ col justify-center"
   >
     <!-- Breadcrumbs nav -->
-    <div class="h-14" flex="~ items-center">
+    <div class="h-14" flex="~ items-center gap-3">
       <div class="flex cursor-pointer" @click="sidebar.toggleCollapsed">
         <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
       </div>
+      <Breadcrumb />
       <div class="ml-auto">
         <n-button type="primary" size="small" @click="logout">
           退出
@@ -29,12 +30,16 @@
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
 import { removeToken } from '@/utils/token'
+import Breadcrumb from './Breadcrumb.vue'
 
 const sidebar = useSidebarStore()
 const router = useRouter()
+const userStore = useUserStore()
 
 function logout() {
   removeToken()
+  console.log('logout')
+  userStore.clear()
   router.push('/login')
 }
 </script>
