@@ -31,15 +31,12 @@ async function loadPermissionInfo(router: Router, { userStore, sidebarStore }: {
   const userInfo = await getUserInfo()
   const routes = createAsyncRoutes(rawRoutes)
   const menuData = (constantRoutes as any[]).concat(rawRoutes)
-  console.log('menuData')
-  console.log(menuData)
   const menus = createSidebarMenus(menuData)
-  console.log('menus', menus)
 
   sidebarStore.set({ menus })
   userStore.set(userInfo)
+
   routes.forEach((route) => {
-    console.log('route', route)
     router.addRoute(route)
   })
 }
