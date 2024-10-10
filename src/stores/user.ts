@@ -32,6 +32,18 @@ export const useUserStore = defineStore('user', () => {
     assign(state, data)
   }
 
+  function clear() {
+    assign(state, {
+      id: '',
+      name: '',
+      rules: [],
+      email: '',
+      token: '',
+      menus: [],
+      rawRoutes: [],
+    })
+  }
+
   // async function updateUserInfo() {
   //   const res = await getUserInfo('admin-token') as ResponseData<UserInfo>
   //   assign(state, res.data!)
@@ -42,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
   //   return createAsyncRoutes(res.data!)
   // }
 
-  return { ...toRefs(state), set }
+  return { ...toRefs(state), set, clear }
 })
 
 export type UserStore = ReturnType<typeof useUserStore>
