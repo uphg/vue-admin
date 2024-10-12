@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides">
+  <n-config-provider :theme-overrides="themeStore.themeOverrides">
     <n-spin :show="$loading.visible" class="min-h-screen">
       <n-message-provider>
         <RouterView />
@@ -12,20 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import type { GlobalThemeOverrides } from 'naive-ui'
+import { useThemeStore } from './stores/theme';
 
 const { $loading } = useGlobalLoading()
-const themeOverrides: GlobalThemeOverrides = {
-  common: {
-    primaryColor: '#6841ea'
-  },
-  Button: {
-    textColor: '#6841ea'
-  },
-  Menu: {
-    itemColorHover: 'rgba(0, 0, 0, 0.06)'
-  }
-}
-
+const themeStore = useThemeStore()
+themeStore.setColor('#6841ea')
 loadGlobalMessage()
 </script>

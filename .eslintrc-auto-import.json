@@ -102,6 +102,7 @@
     "useUserStore": true,
     "merge": true,
     "APP_LOCAL_CACHE_KEY": true,
-    "APP_TOKEN_CACHE_KEY": true
+    "APP_TOKEN_CACHE_KEY": true,
+    "useThemeStore": true
   }
 }
