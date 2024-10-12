@@ -5,7 +5,7 @@ import { getToken } from '@/utils/token'
 import { apiGetUserInfo } from '~mock/getUserInfo'
 import type { ResponseData } from '@/shared/http'
 import { apiGetRouteData } from '~mock/getRouteData'
-import { createAsyncRoutes, createSidebarMenus } from '@/utils/async-route'
+import { createAsyncRoutes, createSidebarMenuMap, createSidebarMenus } from '@/utils/async-route'
 import type { SidebarStore } from '@/stores/sidebar'
 
 const commonRoutes: (string | symbol)[] = ['Login', '404']
@@ -32,8 +32,9 @@ async function loadPermissionInfo(router: Router, { userStore, sidebarStore }: {
   const routes = createAsyncRoutes(rawRoutes)
   const menuData = (constantRoutes as any[]).concat(rawRoutes)
   const menus = createSidebarMenus(menuData)
+  const menuMap = createSidebarMenuMap(menuData)
 
-  sidebarStore.set({ menus })
+  sidebarStore.set({ menus, menuMap })
   userStore.set(userInfo)
 
   routes.forEach((route) => {

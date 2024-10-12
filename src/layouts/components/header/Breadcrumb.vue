@@ -1,16 +1,31 @@
 <template>
   <n-breadcrumb>
-    <n-breadcrumb-item v-for="item in breadItems" :key="item.key">
-      {{ item.label }}
+    <n-breadcrumb-item v-for="(item, index) in breadItems" :key="item.key">
+      <n-dropdown
+        :options="index < breadItems.length - 1 ? getDropOptions(item) : []"
+        @select="handleDropSelect"
+      >
+        <div class="flex items-center">
+          {{ item.label }}
+        </div>
+      </n-dropdown>
     </n-breadcrumb-item>
   </n-breadcrumb>
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
+const router = useRouter()
+const sidebar = useSidebarStore()
 const breadItems = computed(
-  () => route.matched
-    .filter((item) => Boolean(item.path))
-    .map((item) => ({ label: item.meta.title, key: item.path }))
+  () => sidebar.menuMap?.get(route.name as string)?.matchs.map(({ meta, path, name, children }: any) => ({ label: meta.title, key: path, name, children })) || []
 )
+
+function getDropOptions(item: any) {
+  return sidebar.menuMap?.get(item.name)?.children || []
+}
+
+function handleDropSelect(name: string) {
+  router.push({ name })
+}
 </script>

@@ -1,4 +1,3 @@
-import { isNil } from 'lodash-es'
 import { cloneJSON } from './cloneJSON'
 import LayoutDefault from '@/layouts/Default.vue'
 import LayoutParentView from '@/layouts/ParentView.vue'
@@ -19,10 +18,10 @@ const layoutsMap: { [key: string]: any } = {
  */
 export function createAsyncRoutes(data: any[]) {
   const routes = cloneJSON(data)
-  return createRoutes(routes)
+  return baseCreateRoutes(routes)
 }
 
-function createRoutes(routes: any[]) {
+function baseCreateRoutes(routes: any[]) {
   const result: any[] = []
   for (const route of routes) {
     const { component, children, onlyChild, visible, ...rest } = route
@@ -33,7 +32,7 @@ function createRoutes(routes: any[]) {
     }
 
     if (children) {
-      item.children = createRoutes(children)
+      item.children = baseCreateRoutes(children)
     }
     result.push(item)
   }
@@ -47,32 +46,45 @@ function createRoutes(routes: any[]) {
  */
 export function createSidebarMenus(data: any[]) {
   const routes = cloneJSON(data)
-  return createMenus(routes)
+  return baseCreateMenus(routes)
 }
 
-function createMenus(routes: any[], parentPaths: string[] = []) {
+function baseCreateMenus(routes: any[], parentPaths: string[] = [], matchs: any[] = []) {
   const menus: any[] = []
   for (const route of routes) {
     const { path, name, meta, onlyChild, children, hidden, ...rest } = (route?.onlyChild ? getOnlyChildMenu(route) : route) ?? {}
-    if (hidden === true) continue
+    // if (hidden === true) continue
     const pathList = [...parentPaths, path]
-    console.log('pathList')
-    console.log(pathList)
+
     const newPath = pathJoin(pathList)
     const item: any = {
       label: meta?.title,
       key: name,
       path: newPath,
       type: 'item',
+      show: hidden !== true,
+      matchs: [...matchs, { meta, path, name }],
       ...rest,
     }
     if (children) {
       item.type = 'submenu'
-      item.children = createMenus(children, pathList)
+      item.children = baseCreateMenus(children, pathList, item.matchs)
     }
     menus.push(item)
   }
   return menus
+}
+
+export function createSidebarMenuMap(data: any[], map: Map<string, any> = new Map()) {
+  // menus to map
+  const menus = createSidebarMenus(data)
+  for (const menu of menus) {
+    map.set(menu.key, menu)
+    if (menu.children) {
+      createSidebarMenuMap(menu.children, map)
+    }
+  }
+  return map
 }
 
 function getComponent(componentPath: string) {
