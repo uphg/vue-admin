@@ -1,6 +1,8 @@
 <template>
   <div class="sidebar" :class="[{ 'sidebar--collapsed': sidebar.collapsed }]">
-    <div class="h-[var(--navbar-height)]" />
+    <div class="h-[var(--navbar-height)]">
+      <Title :is-collapse="sidebar.collapsed" />
+    </div>
     <div class="h-[calc(100vh-var(--navbar-height))] flex flex-col">
       <n-scrollbar class="h-full">
         <n-menu
@@ -23,10 +25,12 @@
 
 <script setup lang="tsx">
 import type { MenuInst, MenuOption } from 'naive-ui'
+import type { RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
-import { type RouteLocationNormalized, type RouteLocationRaw, type RouteRecordRaw, RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { isNil } from 'lodash-es'
 import { useSidebarStore } from '@/stores/sidebar'
+import Title from './Title.vue'
 
 const route = useRoute()
 const sidebar = useSidebarStore()

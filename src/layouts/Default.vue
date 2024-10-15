@@ -18,7 +18,7 @@
 import Header from './components/header/Header.vue'
 import Content from './components/Content.vue'
 import Footer from './components/Footer.vue'
-import Sidebar from './components/Sidebar.vue'
+import Sidebar from './components/sidebar/Sidebar.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 
 const sidebar = useSidebarStore()
