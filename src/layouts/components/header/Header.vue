@@ -1,12 +1,12 @@
 <template>
   <header
-    class="header position-fixed left-[var(--sidebar-width)] right-0 top-0 box-border px-6" :class="[
+    class="header position-fixed left-[var(--sidebar-width)] right-0 top-0 box-border" :class="[
       { 'sidebar--collapsed': sidebar.collapsed },
     ]"
     flex="~ col justify-center"
   >
     <!-- Breadcrumbs nav -->
-    <div class="h-14" flex="~ items-center gap-3">
+    <div class="h-14 px-6" flex="~ items-center gap-3">
       <div class="flex cursor-pointer" @click="sidebar.toggleCollapsed">
         <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
       </div>
@@ -19,11 +19,7 @@
     </div>
 
     <!-- Tags nav -->
-    <!-- <div class="h-14" flex="~ items-center">
-      <div class="flex cursor-pointer" @click="sidebar.toggleCollapsed">
-        <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
-      </div>
-    </div> -->
+    <Tags />
   </header>
 </template>
 
@@ -31,6 +27,7 @@
 import { useSidebarStore } from '@/stores/sidebar'
 import { removeToken } from '@/utils/token'
 import Breadcrumb from './Breadcrumb.vue'
+import Tags from './Tags.vue'
 
 const sidebar = useSidebarStore()
 const router = useRouter()
@@ -38,7 +35,6 @@ const userStore = useUserStore()
 
 function logout() {
   removeToken()
-  console.log('logout')
   userStore.clear()
   router.push('/login')
 }
