@@ -12,6 +12,9 @@
       </div>
       <Breadcrumb />
       <div class="ml-auto">
+        <n-button quaternary>
+          <n-icon size="24" :component="FullScreenMaximize24Regular" />
+        </n-button>
         <n-button type="primary" size="small" @click="logout">
           退出
         </n-button>
@@ -28,6 +31,8 @@ import { useSidebarStore } from '@/stores/sidebar'
 import { removeToken } from '@/utils/token'
 import Breadcrumb from './Breadcrumb.vue'
 import Tags from './Tags.vue'
+
+import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from '@vicons/fluent'
 
 const sidebar = useSidebarStore()
 const router = useRouter()

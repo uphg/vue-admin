@@ -14,15 +14,15 @@ export const useSidebarStore = defineStore('sidebar', () => {
     menuMap: new Map(),
   })
 
-  function set(value: SidebarState) {
-    assign(state, value)
-  }
-
   function toggleCollapsed() {
     state.collapsed = !state.collapsed
   }
 
-  return { ...toRefs(state), toggleCollapsed, set }
+  function set(value: SidebarState) {
+    assign(state, value)
+  }
+
+  return { ...toRefs(state), set, toggleCollapsed }
 })
 
 export type SidebarStore = ReturnType<typeof useSidebarStore>

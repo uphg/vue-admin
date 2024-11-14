@@ -35,8 +35,6 @@ watch(
       title: route.meta?.title as string,
       path: route.path,
     })
-    console.log('tagsStore.list')
-    console.log(tagsStore.list)
   },
   { immediate: true }
 )
