@@ -11,10 +11,10 @@
         <Icon :name="`menu-${sidebar.collapsed ? 'unfold' : 'fold'}`" />
       </div>
       <Breadcrumb />
-      <div class="ml-auto">
-        <n-button quaternary>
-          <n-icon size="24" :component="FullScreenMaximize24Regular" />
-        </n-button>
+      <div class="ml-auto flex items-center gap-2">
+        <GBaseButton class="flex" @click="toggle ">
+          <n-icon size="18" :component="isFullscreen ? FullScreenMinimize24Regular : FullScreenMaximize24Regular" />
+        </GBaseButton>
         <n-button type="primary" size="small" @click="logout">
           退出
         </n-button>
@@ -31,12 +31,13 @@ import { useSidebarStore } from '@/stores/sidebar'
 import { removeToken } from '@/utils/token'
 import Breadcrumb from './Breadcrumb.vue'
 import Tags from './Tags.vue'
-
+import { useFullscreen } from '@vueuse/core'
 import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from '@vicons/fluent'
 
 const sidebar = useSidebarStore()
 const router = useRouter()
 const userStore = useUserStore()
+const { isFullscreen, toggle } = useFullscreen()
 
 function logout() {
   removeToken()

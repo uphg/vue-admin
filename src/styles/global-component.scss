@@ -1,0 +1,8 @@
+.g-base-button {
+  @apply bg-transparent cursor-pointer border-none p-1;
+  border-radius: var(--border-radius);
+  transition: color .3s var(--transition-bezier), background-color .3s var(--transition-bezier);
+  &:hover {
+    background-color: var(--c-hover);
+  }
+}

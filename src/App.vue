@@ -15,7 +15,7 @@
 import { useThemeStore } from './stores/theme';
 
 const { $loading } = useGlobalLoading()
-const themeStore = useThemeStore()
+const themeStore = useThemeStore() as any
 themeStore.setColor('#6841ea')
 loadGlobalMessage()
 </script>

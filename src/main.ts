@@ -7,11 +7,12 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router/router'
 import { setupRouterGuard } from './router/guards'
-
+import { registerGlobalComponents } from './shared/components'
 const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
 app.mount('#app')
 
+registerGlobalComponents(app)
 setupRouterGuard(router)

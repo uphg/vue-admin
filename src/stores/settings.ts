@@ -14,5 +14,9 @@ export const useSettingsStore = defineStore('settings', () => {
     state.fullScreen = !state.fullScreen
   }
 
-  return { ...toRefs(state), toggleFullScreen }
+  function setFullScreen(value: boolean) {
+    state.fullScreen = value
+  }
+
+  return { ...toRefs(state), toggleFullScreen, setFullScreen }
 })

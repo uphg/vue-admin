@@ -9,6 +9,6 @@
       "~mock/*": ["./mock/*"]
     }
   },
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "mock/**/*"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.tsx", "mock/**/*"],
   "exclude": ["src/**/__tests__/*"]
 }

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@arco-design/color": "^0.4.0",
+    "@vueuse/core": "^11.2.0",
     "axios": "^1.7.2",
     "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",

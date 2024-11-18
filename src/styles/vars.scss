@@ -2,8 +2,10 @@
   --c-text-1: rgba(60, 60, 67);
   --c-text-2: rgba(60, 60, 67, 0.78);
   --c-text-3: rgba(60, 60, 67, 0.56);
-
+  --c-hover: rgba(46, 51, 56, .09);
   --c-divider: rgba(5, 5, 5, 0.06);
+  --transition-bezier: cubic-bezier(.4, 0, .2, 1);
+  --border-radius: 3px;
   --border-color: rgba(227, 227, 227);
   --sidebar-width: 240px;
   --sidebar--collapsed-width: 64px;

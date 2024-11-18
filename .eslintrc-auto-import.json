@@ -107,6 +107,9 @@
     "useTagsStore": true,
     "useSettingsStore": true,
     "baseButton": true,
-    "BaseButton": true
+    "BaseButton": true,
+    "GBaseButton": true,
+    "GlobalComponents": true,
+    "registerGlobalComponents": true
   }
 }
