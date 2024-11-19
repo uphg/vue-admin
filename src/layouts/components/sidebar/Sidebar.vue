@@ -95,7 +95,7 @@ function expandIcon() {
 <style lang="scss" scoped>
 .sidebar {
   transition: width 0.3s var(--n-bezier);
-  border-inline-end: 1px solid var(--border-color);
+  border-inline-end: 1px solid var(--c-border);
   writing-mode: horizontal-tb;
   @apply h-100vh w-[var(--sidebar-width)] box-border fixed top-0 left-0 bottom-0;
   &--collapsed {

@@ -68,7 +68,7 @@ function onWheel(e: WheelEvent) {
 
 <style lang="scss">
 .tags {
-  border-block-start: 1px solid var(--border-color);
+  border-block-start: 1px solid var(--c-border);
 }
 .tags-wrapper::-webkit-scrollbar {
   display: none;

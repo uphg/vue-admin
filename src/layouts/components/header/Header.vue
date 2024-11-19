@@ -1,6 +1,7 @@
 <template>
   <header
-    class="header position-fixed left-[var(--sidebar-width)] right-0 top-0 box-border" :class="[
+    class="header position-fixed left-[var(--sidebar-width)] right-0 top-0 box-border"
+    :class="[
       { 'sidebar--collapsed': sidebar.collapsed },
     ]"
     flex="~ col justify-center"
@@ -12,8 +13,11 @@
       </div>
       <Breadcrumb />
       <div class="ml-auto flex items-center gap-2">
-        <GBaseButton class="flex" @click="toggle ">
+        <GBaseButton class="flex" @click="toggleFullscreen">
           <n-icon size="18" :component="isFullscreen ? FullScreenMinimize24Regular : FullScreenMaximize24Regular" />
+        </GBaseButton>
+        <GBaseButton class="flex" @click="toggleDark()">
+          <n-icon size="18" :component="isDark ? WeatherMoon24Regular : WeatherSunny24Regular" />
         </GBaseButton>
         <n-button type="primary" size="small" @click="logout">
           退出
@@ -31,13 +35,15 @@ import { useSidebarStore } from '@/stores/sidebar'
 import { removeToken } from '@/utils/token'
 import Breadcrumb from './Breadcrumb.vue'
 import Tags from './Tags.vue'
-import { useFullscreen } from '@vueuse/core'
-import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from '@vicons/fluent'
+import { useFullscreen, useDark, useToggle } from '@vueuse/core'
+import { FullScreenMaximize24Regular, FullScreenMinimize24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@vicons/fluent'
 
 const sidebar = useSidebarStore()
 const router = useRouter()
 const userStore = useUserStore()
-const { isFullscreen, toggle } = useFullscreen()
+const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 
 function logout() {
   removeToken()
@@ -48,8 +54,8 @@ function logout() {
 
 <style lang="scss" scoped>
 .header {
-  transition: left 0.3s var(--n-bezier);
-  border-block-end: 1px solid var(--border-color);
+  transition: left 0.3s var(--transition-bezier);
+  border-block-end: 1px solid var(--c-border);
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(8px);
   z-index: 1;

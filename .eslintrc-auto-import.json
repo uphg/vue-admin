@@ -110,6 +110,7 @@
     "BaseButton": true,
     "GBaseButton": true,
     "GlobalComponents": true,
-    "registerGlobalComponents": true
+    "registerGlobalComponents": true,
+    "AppConfigProvider": true
   }
 }

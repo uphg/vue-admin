@@ -1,15 +1,39 @@
 :root {
+  --c-indigo-1: #3451b2;
+  --c-indigo-2: #3a5ccc;
+  --c-indigo-3: #5672cd;
+}
+
+:root {
   --c-text-1: rgba(60, 60, 67);
   --c-text-2: rgba(60, 60, 67, 0.78);
   --c-text-3: rgba(60, 60, 67, 0.56);
   --c-hover: rgba(46, 51, 56, .09);
   --c-divider: rgba(5, 5, 5, 0.06);
+  --c-bg: #ffffff;
+  --c-border: rgba(227, 227, 227);
+
+  --c-primary-1: var(--c-indigo-1);
+  --c-primary-2: var(--c-indigo-2);
+  --c-primary-3: var(--c-indigo-3);
+  
   --transition-bezier: cubic-bezier(.4, 0, .2, 1);
   --border-radius: 3px;
-  --border-color: rgba(227, 227, 227);
   --sidebar-width: 240px;
   --sidebar--collapsed-width: 64px;
   --navbar-height: 54px;
   --tags-height: 40px;
   --header-height: calc(var(--navbar-height) + var(--tags-height));
+}
+
+.dark {
+  --c-text-1: rgba(255, 255, 245, .86);
+  --c-text-2: rgba(235, 235, 245, .6);
+  --c-text-3: rgba(235, 235, 245, .38);
+
+  --c-indigo-1: #a8b1ff;
+  --c-indigo-2: #5c73e7;
+  --c-indigo-3: #3e63dd;
+
+  --c-bg: #1b1b1f;
 }
