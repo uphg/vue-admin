@@ -5,7 +5,7 @@
         :options="index < breadItems.length - 1 ? getDropOptions(item) : []"
         @select="handleDropSelect"
       >
-        <div class="flex items-center">
+        <div class="flex items-center p-1 m--1 border-inherit">
           {{ item.label }}
         </div>
       </n-dropdown>
