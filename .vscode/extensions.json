@@ -1,7 +1,8 @@
 {
   "recommendations": [
     "Vue.volar",
+    "vitest.explorer",
     "dbaeumer.vscode-eslint",
-    "csstools.postcss"
+    "EditorConfig.EditorConfig"
   ]
 }

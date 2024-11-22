@@ -1,10 +1,10 @@
 import type { AxiosRequestConfig } from 'axios'
 
-export type Resource<T> = {
+export interface Resource<T> {
   resource: T
-};
+}
 
-export type Resources<T = any> = {
+export interface Resources<T = any> {
   resources: T[]
   pager: {
     page: number
@@ -13,9 +13,9 @@ export type Resources<T = any> = {
   }
 }
 
-export type User = {
-  id: number,
-  username: string,
+export interface User {
+  id: number
+  username: string
   email: string
 }
 
