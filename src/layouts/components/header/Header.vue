@@ -17,7 +17,7 @@
           <n-icon size="18" :component="isFullscreen ? FullScreenMinimize24Regular : FullScreenMaximize24Regular" />
         </GBaseButton>
         <GBaseButton class="flex" @click="toggleDark">
-          <n-icon size="18" :component="isDark ? WeatherSunny24Regular   : WeatherMoon24Regular" />
+          <n-icon size="18" :component="isDark ? WeatherSunny24Regular : WeatherMoon24Regular" />
         </GBaseButton>
         <n-button type="primary" size="small" @click="logout">
           退出
@@ -32,12 +32,12 @@
 
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
+import vars from '@/styles/_variables.module.scss'
 import { removeToken } from '@/utils/token'
+import { FullScreenMaximize24Regular, FullScreenMinimize24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@vicons/fluent'
+import { useDark, useFullscreen, useToggle } from '@vueuse/core'
 import Breadcrumb from './Breadcrumb.vue'
 import Tags from './Tags.vue'
-import { useFullscreen, useDark, useToggle } from '@vueuse/core'
-import { FullScreenMaximize24Regular, FullScreenMinimize24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@vicons/fluent'
-import vars from '@/styles/_variables.module.scss'
 
 const sidebar = useSidebarStore()
 const router = useRouter()
@@ -45,23 +45,27 @@ const userStore = useUserStore()
 const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
 const isDark = useDark()
 
-onMounted(() => {
-  loadTheme()
-})
+loadTheme()
 
 function loadTheme() {
   const themeStore = useThemeStore()
-  themeStore.setOverrides(isDark.value ? {
-    common: {
-      baseColor: vars['dark-c-bg'],
-      popoverColor: vars['dark-c-bg-soft'],
-    }
-  } : {
-    common: {
-      baseColor: vars['c-bg'],
-      popoverColor: vars['c-bg-soft'],
-    }
-  })
+  themeStore.setOverrides(isDark.value
+    ? {
+        common: {
+          baseColor: vars['dark-c-bg'],
+          popoverColor: vars['dark-c-bg-soft'],
+          tagColor: vars['dark-c-bg-soft'],
+          hoverColor: vars['dark-c-hover'],
+        },
+      }
+    : {
+        common: {
+          baseColor: vars['c-bg'],
+          popoverColor: vars['c-bg-soft'],
+          tagColor: vars['c-bg-soft'],
+          hoverColor: vars['c-hover'],
+        },
+      })
 }
 
 function toggleDark() {

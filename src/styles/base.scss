@@ -7,8 +7,8 @@
 body {
   @apply min-h-100vh line-height-[1.6] font-sans font-size-4;
 
-  background-color: var(--c-bg-soft);
-  color: var(--c-text);
+  background-color: var(--c-bg);
+  color: var(--c-text-1);
 
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

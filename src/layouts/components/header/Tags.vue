@@ -1,12 +1,13 @@
 <template>
-  <div class="tags w-full h-[var(--tags-height)]">
-    <div ref="tagsWrapperRef" class="tags-wrapper w-full h-[var(--tags-height)] overflow-auto flex items-center" @wheel="onWheel">
-      <div class="flex px-6 py-1 gap-2">
+  <div class="tags h-[var(--tags-height)] w-full">
+    <div ref="tagsWrapperRef" class="tags-wrapper h-[var(--tags-height)] w-full flex items-center overflow-auto" @wheel="onWheel">
+      <div class="flex gap-2 px-6 py-1">
         <n-tag
           v-for="(item, index) in tagsStore.list"
           :key="item.name!"
           :closable="tagsStore.list.length > 1"
           :type="tagsStore.active === item.name ? 'primary' : 'default'"
+          :bordered="false"
           class="cursor-pointer"
           @click="onItemClick(item, index)"
           @close="onItemClose(item, index)"
@@ -36,7 +37,7 @@ watch(
       path: route.path,
     })
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 function onItemClick(item: Tag, _index: number) {
@@ -57,8 +58,8 @@ function onItemClose(item: Tag, index: number) {
 }
 
 function onWheel(e: WheelEvent) {
-  e.preventDefault();
-  const deltaY = e.deltaY;
+  e.preventDefault()
+  const deltaY = e.deltaY
   tagsWrapperRef.value!.scrollTo({
     left: tagsWrapperRef.value!.scrollLeft + deltaY * 1.5,
     behavior: 'smooth',

@@ -1,8 +1,8 @@
-import type { GlobalThemeOverrides } from "naive-ui"
-import type { Ref } from "vue"
-import { assign, merge } from "lodash-es"
-import { defineStore } from "pinia"
+import type { GlobalThemeOverrides } from 'naive-ui'
+import type { Ref } from 'vue'
 import { generate } from '@arco-design/color'
+import { assign, merge } from 'lodash-es'
+import { defineStore } from 'pinia'
 
 type UseThemeStore = ReturnType<typeof defineStore<'theme', {
   themeOverrides: Ref<GlobalThemeOverrides>
@@ -13,6 +13,7 @@ type UseThemeStore = ReturnType<typeof defineStore<'theme', {
 export const useThemeStore: UseThemeStore = defineStore('theme', () => {
   const themeOverrides = ref<GlobalThemeOverrides>({
     common: {
+      textColorBase: 'var(--c-text-1)',
       hoverColor: 'var(--c-hover)',
       primaryColor: 'var(--c-primary-2)',
       primaryColorHover: 'var(--c-primary-1)',
@@ -22,8 +23,8 @@ export const useThemeStore: UseThemeStore = defineStore('theme', () => {
       textColor3: 'var(--c-text-3)',
     },
     Menu: {
-      itemColorHover: 'var(--c-hover)'
-    }
+      itemColorHover: 'var(--c-hover)',
+    },
   })
   function setOverrides(overrides: GlobalThemeOverrides) {
     merge(themeOverrides.value, overrides)
