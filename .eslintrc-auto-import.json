@@ -104,6 +104,13 @@
     "APP_LOCAL_CACHE_KEY": true,
     "APP_TOKEN_CACHE_KEY": true,
     "useThemeStore": true,
-    "useTagsStore": true
+    "useTagsStore": true,
+    "useSettingsStore": true,
+    "baseButton": true,
+    "BaseButton": true,
+    "GBaseButton": true,
+    "GlobalComponents": true,
+    "registerGlobalComponents": true,
+    "AppConfigProvider": true
   }
 }

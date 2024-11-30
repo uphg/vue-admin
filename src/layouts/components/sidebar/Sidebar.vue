@@ -7,7 +7,6 @@
       <n-scrollbar class="h-full">
         <n-menu
           ref="menuRef"
-          :key="menuKey"
           v-model:value="selectedKey"
           v-model:expanded-keys="expandedKeys"
           :collapsed="sidebar.collapsed"
@@ -26,10 +25,10 @@
 <script setup lang="tsx">
 import type { MenuInst, MenuOption } from 'naive-ui'
 import type { RouteLocationNormalized, RouteLocationRaw, RouteRecordRaw } from 'vue-router'
-import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
-import { RouterLink } from 'vue-router'
-import { isNil } from 'lodash-es'
 import { useSidebarStore } from '@/stores/sidebar'
+import { BookmarkOutline, CaretDownOutline } from '@vicons/ionicons5'
+import { isNil } from 'lodash-es'
+import { RouterLink } from 'vue-router'
 import Title from './Title.vue'
 
 const route = useRoute()
@@ -37,13 +36,10 @@ const sidebar = useSidebarStore()
 const expandedKeys = ref<string[]>([])
 const selectedKey = ref<string | undefined>()
 const menuRef = ref<MenuInst>()
-const menuKey = ref<number>(0)
+
 watch(route, handleMenuExpand)
 
-onMounted(() => {
-  menuKey.value = 1
-  handleMenuExpand(route)
-})
+handleMenuExpand(route)
 
 function handleMenuExpand(route: RouteLocationNormalized) {
   const { matched, name } = route ?? {}
@@ -95,7 +91,7 @@ function expandIcon() {
 <style lang="scss" scoped>
 .sidebar {
   transition: width 0.3s var(--n-bezier);
-  border-inline-end: 1px solid var(--border-color);
+  border-inline-end: 1px solid var(--c-border);
   writing-mode: horizontal-tb;
   @apply h-100vh w-[var(--sidebar-width)] box-border fixed top-0 left-0 bottom-0;
   &--collapsed {

@@ -1,12 +1,12 @@
-import type { RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw, Router } from 'vue-router'
-import { constantRoutes } from './router'
-import type { UserState, UserStore } from '@/stores/user'
-import { getToken } from '@/utils/token'
-import { apiGetUserInfo } from '~mock/getUserInfo'
 import type { ResponseData } from '@/shared/http'
-import { apiGetRouteData } from '~mock/getRouteData'
-import { createAsyncRoutes, createSidebarMenuMap, createSidebarMenus } from '@/utils/async-route'
 import type { SidebarStore } from '@/stores/sidebar'
+import type { UserState, UserStore } from '@/stores/user'
+import type { RouteLocationNormalized, RouteLocationNormalizedLoaded, Router, RouteRecordRaw } from 'vue-router'
+import { createAsyncRoutes, createSidebarMenuMap, createSidebarMenus } from '@/utils/async-route'
+import { getToken } from '@/utils/token'
+import { apiGetRouteData } from '~mock/getRouteData'
+import { apiGetUserInfo } from '~mock/getUserInfo'
+import { constantRoutes } from './router'
 
 const commonRoutes: (string | symbol)[] = ['Login', '404']
 

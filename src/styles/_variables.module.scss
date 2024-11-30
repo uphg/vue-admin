@@ -1,0 +1,25 @@
+
+/* === Default === */
+$c-bg: #ffffff;
+$c-bg-alt: #f6f6f7;
+$c-bg-elv: #ffffff;
+$c-bg-soft: #f6f6f7;
+
+/* === Dark === */
+$dark-c-bg: #1b1b1f;
+$dark-c-bg-alt: #161618;
+$dark-c-bg-elv: #202127;
+$dark-c-bg-soft: #202127;
+
+/* === Other === */
+$c-hover: rgba(46, 51, 56, .09);
+$dark-c-hover: rgba(255, 255, 255, .09);
+
+:export {
+  c-bg: $c-bg;
+  c-bg-soft: $c-bg-soft;
+  dark-c-bg: $dark-c-bg;
+  dark-c-bg-soft: $dark-c-bg-soft;
+  c-hover: $c-hover;
+  dark-c-hover: $dark-c-hover;
+}

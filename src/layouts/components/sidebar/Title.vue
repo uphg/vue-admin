@@ -1,11 +1,11 @@
 <template>
   <div
-    class="w-full h-full justify-start items-center overflow-hidden"
-    :class="{ 'px-5': !isCollapse ,'px-2.5': isCollapse}"
+    class="h-full w-full items-center justify-start overflow-hidden"
+    :class="{ 'px-5': !isCollapse, 'px-2.5': isCollapse }"
     flex="~ row items-center"
     transition="padding 0.3s"
   >
-    <div class="px-2 flex ">
+    <div class="flex px-2">
       <n-icon size="28">
         <IconLogo />
       </n-icon>
@@ -19,8 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import IconLogo from './IconLogo.vue'
 import FadeTransition from '@/components/FadeTransition.vue'
+import IconLogo from './IconLogo.vue'
 
 const isCollapse = defineModel('isCollapse')
 </script>
