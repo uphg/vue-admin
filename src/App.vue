@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { useThemeStore } from './stores/theme';
+import { useThemeStore } from './stores/theme'
 
 const { $loading } = useGlobalLoading()
 const themeStore = useThemeStore()
