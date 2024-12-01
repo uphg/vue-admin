@@ -47,7 +47,7 @@
   --c-gutter: #e2e2e3;
 
   --c-bg: #{c-bg};
-  // --c-bg-alt: #f6f6f7;
+  --c-bg-alt: #{c-bg-alt};
   // --c-bg-elv: #ffffff;
   --c-bg-soft: #{c-bg-soft};
 }
@@ -95,7 +95,7 @@
   --c-gutter: #000000;
 
   --c-bg: #{$dark-c-bg};
-  // --c-bg-alt: #{$dark-c-bg-alt};
+  --c-bg-alt: #{$dark-c-bg-alt};
   // --c-bg-elv: #{$dark-c-bg-elv};
   --c-bg-soft: #{$dark-c-bg-soft};
 }

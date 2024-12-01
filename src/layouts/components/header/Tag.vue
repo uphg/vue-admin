@@ -3,6 +3,7 @@
     class="nav-tag"
     :type="active ? 'primary' : 'default'"
     :closable="closable"
+    :bordered="false"
     @click="onClick"
     @close="onClose"
   >
@@ -33,10 +34,9 @@ defineProps({
 
 <style lang="scss" scoped>
 :deep(.n-tag.nav-tag) {
-  // @apply cursor-pointer;
   cursor: pointer;
-  // &:hover {
-  //   border-color: var(--n-color-checked);
-  // }
+}
+:global(.n-tag.nav-tag) {
+  cursor: pointer;
 }
 </style>

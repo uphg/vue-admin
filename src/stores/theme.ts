@@ -32,14 +32,12 @@ export const useThemeStore: UseThemeStore = defineStore('theme', () => {
 
   function setColor(color: string) {
     const colors = generate(color, { list: true })
-    themeOverrides.value.common = {
+    assign(themeOverrides.value.common, {
       primaryColor: colors[5],
       primaryColorHover: colors[4],
       primaryColorSuppl: colors[4],
       primaryColorPressed: colors[6],
-    }
-    console.log('themeOverrides.value.common')
-    console.log(themeOverrides.value.common)
+    })
   }
   return { themeOverrides, setOverrides, setColor }
 })
