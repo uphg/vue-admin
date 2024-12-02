@@ -1,5 +1,5 @@
-import { NConfigProvider, NMessageProvider, NSpin } from "naive-ui"
-import { useThemeStore } from '../stores/theme';
+import { NConfigProvider, NMessageProvider, NSpin } from 'naive-ui'
+import { useThemeStore } from '../stores/theme'
 
 const AppConfigProvider = defineComponent({
   name: 'AppConfigProvider',

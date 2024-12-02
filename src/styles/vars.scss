@@ -46,10 +46,10 @@
   --c-divider: #e2e2e3;
   --c-gutter: #e2e2e3;
 
-  --c-bg: #{c-bg};
-  --c-bg-alt: #{c-bg-alt};
+  --c-bg: #{$c-bg};
+  --c-bg-alt: #{$c-bg-alt};
   // --c-bg-elv: #ffffff;
-  --c-bg-soft: #{c-bg-soft};
+  --c-bg-soft: #{$c-bg-soft};
 }
 
 .dark {

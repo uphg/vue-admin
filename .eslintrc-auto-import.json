@@ -111,6 +111,8 @@
     "GBaseButton": true,
     "GlobalComponents": true,
     "registerGlobalComponents": true,
-    "AppConfigProvider": true
+    "AppConfigProvider": true,
+    "darkCommon": true,
+    "lightCommon": true
   }
 }

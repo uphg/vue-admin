@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import NavTag from './Tag.vue'
 import type { TagsItem } from '@/stores/tags'
+import NavTag from './Tag.vue'
 
 const tagsWrapperRef = shallowRef<HTMLDivElement | null>(null)
 const tagsStore = useTagsStore()

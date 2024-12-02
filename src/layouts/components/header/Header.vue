@@ -32,10 +32,9 @@
 
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
-import vars from '@/styles/_variables.module.scss'
 import { removeToken } from '@/utils/token'
 import { FullScreenMaximize24Regular, FullScreenMinimize24Regular, WeatherMoon24Regular, WeatherSunny24Regular } from '@vicons/fluent'
-import { useDark, useFullscreen, useToggle } from '@vueuse/core'
+import { useDark, useFullscreen } from '@vueuse/core'
 import Breadcrumb from './Breadcrumb.vue'
 import Tags from './Tags.vue'
 
@@ -44,39 +43,28 @@ const router = useRouter()
 const userStore = useUserStore()
 const { isFullscreen, toggle: toggleFullscreen } = useFullscreen()
 const isDark = useDark()
-
-loadTheme()
-
-function loadTheme() {
-  const themeStore = useThemeStore()
-  themeStore.setOverrides(isDark.value
-    ? {
-        common: {
-          baseColor: vars['dark-c-bg'],
-          popoverColor: vars['dark-c-bg-soft'],
-          tagColor: vars['dark-c-bg-soft'],
-          hoverColor: vars['dark-c-hover'],
-        },
-      }
-    : {
-        common: {
-          baseColor: vars['c-bg'],
-          popoverColor: vars['c-bg-soft'],
-          tagColor: vars['c-bg-soft'],
-          hoverColor: vars['c-hover'],
-        },
-      })
-}
+const message = useMessage()
+const dialog = useDialog()
+const themeStore = useThemeStore()
 
 function toggleDark() {
   isDark.value = !isDark.value
-  loadTheme()
+  themeStore.loadTheme(isDark.value)
 }
 
 function logout() {
-  removeToken()
-  userStore.clear()
-  router.push('/login')
+  dialog.warning({
+    title: '注意',
+    content: '确定要退出吗？',
+    positiveText: '确定',
+    negativeText: '取消',
+    onPositiveClick: () => {
+      removeToken()
+      userStore.clear()
+      message.success('退出成功')
+      router.push('/login')
+    },
+  })
 }
 </script>
 
